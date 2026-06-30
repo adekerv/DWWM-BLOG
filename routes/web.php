@@ -9,7 +9,7 @@ Route::get('/', function () { //the "/" represents the racine.
     return view('HOME');
 });
 
-Route::get('/articles', [ArticleController::class, 'show']);
+Route::get('/articles', [ArticleController::class, 'index']);
 
 
 
