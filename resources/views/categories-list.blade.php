@@ -14,8 +14,10 @@
         <p>Pani Category sorti la</p>
     @else 
         {{-- -Boucle to display the categories --}}
+
         @foreach ($categories as $category)
          <h2> {{ $category -> name }}</h2>
+         <p>{{ $article->title }}</p>
             
         @endforeach
     @endif
