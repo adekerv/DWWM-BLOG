@@ -8,7 +8,7 @@
 </head>
 </define>
 <body>
-    <h1>Categories</h1>
+    <h1>Categories list</h1>
     {{-- Verification --}}
     @if($categories->isEmpty())
         <p>Pani Category sorti la</p>
@@ -19,6 +19,8 @@
          <h2> {{ $category -> name }}</h2>
          <p>{{ $article->title }}</p>
             
+
+    </div>
         @endforeach
     @endif
 </body>

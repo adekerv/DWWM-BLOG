@@ -15,11 +15,12 @@
     @else
         {{-- Boucle to show each article. --}}
         @foreach($articles as $article)
+        <div>
         <h2> {{ $article->title }} </h2>
         <p> {{ $article->content }}</p>
-        <p> Category: {{ $article->category->name }}</p>
-        <p> Author: {{ $article->user->name }}</p>
-
+        <p> Category: {{ $article->category?->name}}</p>
+        <p> Author: {{ $article->user?->name}}</p>
+        </div>
 
 
         @endforeach
