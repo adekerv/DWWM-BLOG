@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('status', ['draft','published'])->default('draft'); 
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
+            $table->foreignId('category_id')->constrained()->restrictOnDelete();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
         });
     }
 
