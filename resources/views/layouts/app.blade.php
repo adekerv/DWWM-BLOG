@@ -1,36 +1,34 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Dynamic Title for each page -->
+    <title>@yield('title', 'Mon Blog')</title>
+    <!-- Add your CSS / Tailwind framework here -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-white text-gray-900 antialiased font-sans">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
-
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+    <!-- Global Header (Persistent on all screens) -->
+    <header class="border-b border-gray-300 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+        <!-- Logo / Placeholder box -->
+        <div class="w-12 h-12 border-2 border-black flex items-center justify-center relative">
+            <span class="absolute inset-0 flex items-center justify-center text-xl font-light">✕</span>
         </div>
-    </body>
+        
+        <!-- Auth Links -->
+        <nav class="space-x-4 text-sm font-medium">
+            <a href="#" class="underline hover:text-gray-600">Se connecter</a>
+            <a href="#" class="underline hover:text-gray-600">S'inscrire</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto px-4 py-6">
+        <!-- This is where your individual pages will insert themselves -->
+        @yield('content')
+    </main>
+
+</body>
 </html>

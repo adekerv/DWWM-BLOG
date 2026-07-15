@@ -14,9 +14,16 @@ class ArticleController extends Controller
     public function index()
     {
         // Retrieves all articles from newest to oldest
-        $articles = Article::all();
+        $articles = Article::with(['category','user'])->get();
 
         // Returns view resources/views/article-list.blade.php
-        return view('articles-list',['articles' => $articles]); 
+        return view('articles-list',compact('articles')); 
+    }
+
+    public function adminIndex()
+    {
+
+        $articles = Article::with(['category','user'])->get();
+        return view('articles-list-admin',compact('articles'));
     }
     }

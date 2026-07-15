@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
-
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () { //the "/" represents the racine. 
     return view('HOME');
@@ -11,6 +11,9 @@ Route::get('/', function () { //the "/" represents the racine.
 
 Route::get('/articles', [ArticleController::class, 'index']);
 
+Route::get('/admin/articles', [ArticleController::class,'adminIndex']);
+
+Route::get('/categories', [CategoryController::class,'index']);
 
 
 

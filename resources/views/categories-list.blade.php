@@ -9,19 +9,15 @@
 </define>
 <body>
     <h1>Categories list</h1>
-    {{-- Verification --}}
-    @if($categories->isEmpty())
-        <p>Pani Category sorti la</p>
-    @else 
-        {{-- -Boucle to display the categories --}}
+    {{-- Boucle to display the categories --}}
+    @foreach ($categories as $category)
+        <h2>{{ $category->name }}</h2>
 
-        @foreach ($categories as $category)
-         <h2> {{ $category -> name }}</h2>
-         <p>{{ $article->title }}</p>
-            
-
-    </div>
+        {{-- Inner loop to display articles for this specific category --}}
+        @foreach ($category->articles as $article)
+            <p>{{ $article->title }}</p>
         @endforeach
-    @endif
+    @endforeach
+
 </body>
 </html>

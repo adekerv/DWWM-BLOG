@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use PhpParser\Builder\Function_;
-use App\Models\Category;
 
+use App\Models\Category;
 class Article extends Model
 {
     protected $table = 'articles';
