@@ -29,7 +29,7 @@
                             [ {{ $article->category->name ?? 'Sans catégorie' }} ] [ Tag 1 ] [ Tag 2 ]
                         </div>
                         <div>
-                            {{ $article->created_at ? $article->created_at->translatedFormat('j M Y') : 'Date inconnue' }}
+                            {{ $article->published_at ? $article->published_at->translatedFormat('j M Y') : 'Non publié' }}
                         </div>
                     </div>
                     
