@@ -14,10 +14,10 @@
     <header class="border-b border-gray-300 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <!-- Logo / Placeholder box -->
         <div class="w-12 h-12 border-2 border-black flex items-center justify-center relative">
-            <span class="absolute inset-0 flex items-center justify-center text-xl font-light">✕</span>
+            <span class="absolute inset-0 flex items-center justify-center text-xl font-light">KING</span>
         </div>
         
-        <!-- Auth Links -->
+        <!-- Authentication Links -->
         <nav class="space-x-4 text-sm font-medium">
             <a href="#" class="underline hover:text-gray-600">Se connecter</a>
             <a href="#" class="underline hover:text-gray-600">S'inscrire</a>

@@ -30,4 +30,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Articles List Route
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+
+// Article Details Route (using 'details' method instead of 'show')
+Route::get('/articles/{article}', [ArticleController::class, 'details'])->name('articles.details');
+
 require __DIR__.'/auth.php';
