@@ -22,10 +22,12 @@
     </h1>
 
     {{-- Metadata --}}
-    <div class="text-xs text-gray-500">
+    {{--<div class="text-xs text-gray-500">
         Par {{ $article->user->name ?? 'Auteur inconnu' }} &middot; {{ $article->created_at ? $article->created_at->translatedFormat('j M Y') : 'Date inconnue' }}
+    </div>--}}
+    <div class="text-xs text-gray-500">
+    Par {{ $article->user->name ?? 'Auteur inconnu' }} &middot; {{ $article->published_at ? $article->published_at->translatedFormat('j M Y') : 'Non publié' }}
     </div>
-
     <hr class="border-t border-gray-400">
 
     {{-- Content --}}
