@@ -16,6 +16,8 @@ class ArticleController extends Controller
     {
         // Retrieves articles newest to oldest, paginated 4 per page
         $articles = Article::with(['category', 'user'])
+                            ->where('status','published')      
+                            ->orderByDesc('publish_at')
                             ->latest()
                             ->paginate(4);
 
