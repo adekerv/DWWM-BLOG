@@ -3,17 +3,33 @@
 @section('content')
     <div>
         {{-- Filters Section --}}
-        <div class="flex items-center space-x-6 mb-8 border-b border-gray-300 pb-4">
+        <form action="{{ route('articles.index') }}" method="GET" class="flex items-center space-x-6 mb-8 border-b border-gray-300 pb-4">
             <span class="text-sm font-medium text-gray-700">Filtres :</span>
-            <select class="border border-gray-450 p-3 text-sm bg-white min-w-[200px] focus:outline-none focus:ring-1 focus:ring-black">
+            
+            {{-- Status Filter --}}
+            <select name="status" onchange="this.form.submit()" class="border border-gray-400 p-3 text-sm bg-white min-w-[200px] focus:outline-none focus:ring-1 focus:ring-black">
+                <option value="">Tous les statuts</option>
+                <option value="published" {{ request('status') === 'published' ? 'selected' : '' }}>Publiés</option>
+                <option value="draft" {{ request('status') === 'draft' ? 'selected' : '' }}>Brouillons (Non publiés)</option>
+            </select>
+
+            <select class="border border-gray-400 p-3 text-sm bg-white min-w-[200px] focus:outline-none focus:ring-1 focus:ring-black" disabled>
                 <option value="">Toutes les catégories</option>
                 {{-- Dynamic categories loop will go here in the future --}}
             </select>
-            <select class="border border-gray-400 p-3 text-sm bg-white min-w-[200px] focus:outline-none focus:ring-1 focus:ring-black">
+            
+            <select class="border border-gray-400 p-3 text-sm bg-white min-w-[200px] focus:outline-none focus:ring-1 focus:ring-black" disabled>
                 <option value="">Tous les tags</option>
                 {{-- Dynamic tags loop will go here in the future --}}
             </select>
-        </div>
+
+            {{-- Reset Filters Link --}}
+            @if(request('status'))
+                <a href="{{ route('articles.index') }}" class="text-xs text-gray-500 hover:text-black underline pl-2">
+                    Réinitialiser
+                </a>
+            @endif
+        </form>
     </div>
 
     {{-- Verification --}}
