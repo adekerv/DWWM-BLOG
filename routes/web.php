@@ -1,26 +1,22 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { //the "/" represents the racine. 
+// Public Front-End Routes
+Route::get('/', function () { 
     return view('HOME');
 });
 
-Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
-Route::get('/admin/articles', [ArticleController::class,'adminIndex']);
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('/articles/{article:slug}', [ArticleController::class, 'details'])->name('articles.details');
 
-Route::get('/categories', [CategoryController::class,'index']);
-
-
-
-
-
-
- Route::get('/dashboard', function () {
+// Dashboard & Auth Profile Routes
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -30,10 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Articles List Route
-Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
-
-// Article Details Route (using 'details' method instead of 'show')
-Route::get('/articles/{article}', [ArticleController::class, 'details'])->name('articles.details');
+// Admin Dashboard Routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/articles', [ArticleController::class, 'adminIndex'])->name('articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
+});
 
 require __DIR__.'/auth.php';
