@@ -3,31 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Dynamic Title for each page -->
-    <title>@yield('title', 'Mon Blog')</title>
-    <!-- Add your CSS / Tailwind framework here -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>@yield('title', 'Mon Blog') - KING</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-gray-900 antialiased font-sans">
+<body class="bg-white text-black min-h-screen flex flex-col antialiased">
 
-    <!-- Global Header (Persistent on all screens) -->
-    <header class="border-b border-gray-300 max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-        <!-- Logo / Placeholder box -->
-        <div class="w-12 h-12 border-2 border-black flex items-center justify-center relative">
-            <span class="absolute inset-0 flex items-center justify-center text-xl font-light">KING</span>
+
+   {{-- Global Navigation Header --}}
+    <header class="border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-8">
+                <a href="{{ url('/') }}" class="text-xl font-bold tracking-tight">KING</a>
+                <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="{{ route('articles.index') }}" class="text-gray-600 hover:text-black transition">Articles</a>
+                    <a href="{{ route('categories.index') }}" class="text-gray-600 hover:text-black transition">Catégories</a>
+                </nav>
+            </div>
+            
+            {{-- Right side actions container --}}
+            <div class="flex items-center space-x-6 text-sm font-medium">
+                {{-- Auth Mockup Links --}}
+                <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">Se connecter</a>
+                <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">S'inscrire</a>
+                
+                {{-- Admin Button --}}
+                <a href="{{ route('admin.articles.index') }}" class="text-gray-600 hover:text-black border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-50 transition">
+                    Espace Admin
+                </a>
+            </div>
         </div>
-        
-        <!-- Authentication Links -->
-        <nav class="space-x-4 text-sm font-medium">
-            <a href="#" class="underline hover:text-gray-600">Se connecter</a>
-            <a href="#" class="underline hover:text-gray-600">S'inscrire</a>
-        </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="max-w-6xl mx-auto px-4 py-6">
-        <!-- This is where your individual pages will insert themselves -->
+    {{-- Main Content Area --}}
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        {{-- Success Flash Messages (Triggers when your Controller redirects with success) --}}
+        @if(session('success'))
+            <div class="mb-6 p-4 bg-green-50 border border-green-400 text-green-800 text-sm font-medium rounded flex justify-between items-center">
+                <span>{{ session('success') }}</span>
+                <button type="button" onclick="this.parentElement.remove()" class="font-bold text-green-600 hover:text-green-900">&times;</button>
+            </div>
+        @endif
+
+        {{-- Validation Error Flash Messages --}}
+        @if($errors->any())
+            <div class="mb-6 p-4 bg-red-50 border border-red-400 text-red-800 text-sm font-medium rounded">
+                <p class="font-semibold mb-1">Veuillez corriger les erreurs suivantes :</p>
+                <ul class="list-disc list-inside space-y-0.5 opacity-90">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        {{-- Page-Specific Content Injection --}}
         @yield('content')
+        
     </main>
 
 </body>
