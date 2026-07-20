@@ -66,11 +66,16 @@
         </a>
 
         {{-- Delete Button (Cross Icon) --}}
-        <a href="#" class="text-black hover:text-gray-600 transition" title="Supprimer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-        </a>
+        {{-- Delete Button (Cross Icon) --}}
+        <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');" style="margin: 0;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="text-black hover:text-gray-600 transition bg-transparent border-none p-1 cursor-pointer flex items-center" title="Supprimer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </form>
 
         {{-- View Public Details Button (External Link Icon) --}}
         <a href="{{ route('articles.details', $article->slug) }}" class="text-black hover:text-gray-600 transition" title="Voir l'article">

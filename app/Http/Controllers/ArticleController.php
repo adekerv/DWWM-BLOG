@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+
+
 use App\Models\Article;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
@@ -131,6 +134,22 @@ class ArticleController extends Controller
         $article->save();
 
         return redirect()->route('admin.articles.index')->with('success', 'Article modifié avec succès !');
+    }
+
+    /**
+     * ADMIN ACTION: Delete an article from the database.
+     */
+    public function destroy(int $id)
+    {
+        // Find the article or fail automatically if it doesn't exist
+        $article = Article::findOrFail($id);
+        
+        // Delete it from the database
+        $article->delete();
+
+        // Redirect back to the list with a success message
+        return redirect()->route('admin.articles.index')
+                         ->with('success', 'Article supprimé avec succès !');
     }
 
     /**
