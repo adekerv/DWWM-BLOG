@@ -12,6 +12,8 @@ Route::get('/', function () {
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
+
+
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{article:slug}', [ArticleController::class, 'details'])->name('articles.details');
 
