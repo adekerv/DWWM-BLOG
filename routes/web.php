@@ -50,5 +50,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     
 });
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
+
+// Registration Routes
+Route::get('/users/create', [RegisterController::class, 'create'])->name('register');
+Route::post('/users', [RegisterController::class, 'store'])->name('users.store');
+
+// Login & Logout Routes
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 require __DIR__.'/auth.php';
