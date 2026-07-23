@@ -17,7 +17,7 @@ Route::get('/articles/{article:slug}', [ArticleController::class, 'details'])->n
 
 // Dashboard & Auth Profile Routes
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard'); 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -7,7 +7,7 @@
     {{-- Back Link --}}
     <div>
         <a href="{{ route('admin.articles.index') }}" class="text-sm text-black hover:underline">
-            &larr; Retour à la liste
+            &larr; Retour à la listes
         </a>
     </div>
 
