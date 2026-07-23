@@ -1,23 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Liste de Categories</title>
-</head>
-</define>
-<body>
-    <h1>Categories list</h1>
-    {{-- Boucle to display the categories --}}
-    @foreach ($categories as $category)
-        <h2>{{ $category->name }}</h2>
+@extends('layouts.app')
 
-        {{-- Inner loop to display articles for this specific category --}}
-        @foreach ($category->articles as $article)
-            <p>{{ $article->title }}</p>
+@section('title', 'Liste des Catégories')
+
+@section('content')
+    <h1 class="text-3xl font-light text-black mb-8">Liste des Catégories</h1>
+
+    <div class="space-y-8">
+        @foreach ($categories as $category)
+            <div class="border-b border-gray-200 pb-6">
+                <h2 class="text-xl font-semibold text-black mb-3">{{ $category->name }}</h2>
+
+                @if($category->articles->count() > 0)
+                    <ul class="list-disc list-inside space-y-1 text-gray-700">
+                        @foreach ($category->articles as $article)
+                            <li>
+                                <a href="{{ route('articles.details', $article->slug) }}" class="hover:underline">
+                                    {{ $article->title }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p class="text-sm text-gray-500 italic">Aucun article dans cette catégorie.</p>
+                @endif
+            </div>
         @endforeach
-    @endforeach
-
-</body>
-</html>
+    </div>
+@endsection
