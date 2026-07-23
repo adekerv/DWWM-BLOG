@@ -23,14 +23,40 @@
             
             {{-- Right side actions container --}}
             <div class="flex items-center space-x-6 text-sm font-medium">
-                {{-- Static Auth Links (Placeholder until authentication logic is enabled) --}}
-                <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">Se connecter</a>
-                <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">S'inscrire</a>
                 
-                {{-- Admin Button --}}
-                <a href="{{ route('admin.articles.index') }}" class="text-gray-600 hover:text-black border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-50 transition">
-                    Espace Admin
-                </a>
+                {{-- Guest Navigation (When NOT logged in) --}}
+                @guest
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-black underline underline-offset-4 transition">
+                        Se connecter
+                    </a>
+                    <a href="{{ route('register') }}" class="text-gray-600 hover:text-black underline underline-offset-4 transition">
+                        S'inscrire
+                    </a>
+                @endguest
+
+                {{-- Auth Navigation (When logged in) --}}
+                @auth
+                    {{-- User Greeting --}}
+                    <span class="text-black font-semibold">
+                        Bonjour, {{ Auth::user()->firstname ?? Auth::user()->name }}
+                    </span>
+
+                    {{-- Logout Form (POST request with CSRF protection) --}}
+                    <form method="POST" action="{{ route('logout') }}" class="m-0 flex items-center">
+                        @csrf
+                        <button type="submit" class="text-gray-600 bg-transparent border-none cursor-pointer hover:text-black underline underline-offset-4 transition">
+                            Se déconnecter
+                        </button>
+                    </form>
+
+                    {{-- Espace Admin Button (Shown only for Admin users) --}}
+                    @if(Auth::user()->isAdmin())
+                        <a href="{{ route('admin.articles.index') }}" class="text-gray-600 hover:text-black border border-gray-300 px-3 py-1.5 rounded hover:bg-gray-50 transition">
+                            Espace Admin
+                        </a>
+                    @endif
+                @endauth
+
             </div>
         </div>
     </header>
