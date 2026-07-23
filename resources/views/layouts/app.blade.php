@@ -10,7 +10,6 @@
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col antialiased">
 
-
    {{-- Global Navigation Header --}}
     <header class="border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -24,7 +23,7 @@
             
             {{-- Right side actions container --}}
             <div class="flex items-center space-x-6 text-sm font-medium">
-                {{-- Auth Mockup Links --}}
+                {{-- Static Auth Links (Placeholder until authentication logic is enabled) --}}
                 <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">Se connecter</a>
                 <a href="#" class="text-gray-600 hover:text-black underline underline-offset-4 transition">S'inscrire</a>
                 
@@ -39,7 +38,7 @@
     {{-- Main Content Area --}}
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
-        {{-- Success Flash Messages (Triggers when your Controller redirects with success) --}}
+        {{-- Success Flash Messages --}}
         @if(session('success'))
             <div class="mb-6 p-4 bg-green-50 border border-green-400 text-green-800 text-sm font-medium rounded flex justify-between items-center">
                 <span>{{ session('success') }}</span>

@@ -3,6 +3,21 @@
 @section('title', 'Admin - Liste des articles')
 
 @section('content')
+
+    {{-- Espace Admin Tabs --}}
+    <div class="border-b border-gray-200 mb-8 mt-2">
+        <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <a href="{{ route('admin.articles.index') }}" 
+               class="{{ request()->routeIs('admin.articles.*') ? 'border-black text-black' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg transition">
+                Articles
+            </a>
+            <a href="{{ route('admin.categories.index') }}" 
+               class="{{ request()->routeIs('admin.categories.*') ? 'border-black text-black' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' }} whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg transition">
+                Catégories
+            </a>
+        </nav>
+    </div>
+
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-light text-black">Articles</h1>
         <a href="{{ route('admin.articles.create') }}" class="bg-black text-white px-6 py-2 text-sm font-semibold hover:bg-gray-800 transition">
@@ -24,19 +39,19 @@
         <table class="w-full text-left border-collapse">
             <thead>
                 <tr class="border-b border-gray-300">
-                    <th class="py-4 font-semibold text-sm text-gray-800 w-1/3">Titre</th>
-                    <th class="py-4 font-semibold text-sm text-gray-800">Catégorie</th>
-                    <th class="py-4 font-semibold text-sm text-gray-800">Statut</th>
-                    <th class="py-4 font-semibold text-sm text-gray-800">Date</th>
-                    <th class="py-4 font-semibold text-sm text-gray-800">Actions</th>
+                    <th class="py-4 font-semibold text-lg text-gray-800 w-1/3">Titre</th>
+                    <th class="py-4 font-semibold text-lg text-gray-800">Catégorie</th>
+                    <th class="py-4 font-semibold text-lg text-gray-800">Statut</th>
+                    <th class="py-4 font-semibold text-lg text-gray-800">Date</th>
+                    <th class="py-4 font-semibold text-lg text-gray-800">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse($articles as $article)
                     <tr class="border-b border-gray-200 last:border-0 hover:bg-gray-50">
-                        <td class="py-4 text-sm text-black pr-4">{{ $article->title }}</td>
-                        <td class="py-4 text-sm text-gray-700">{{ $article->category->name ?? 'Sans catégorie' }}</td>
-                        <td class="py-4 text-sm">
+                        <td class="py-4 text-base text-black pr-4">{{ $article->title }}</td>
+                        <td class="py-4 text-base text-gray-700">{{ $article->category->name ?? 'Sans catégorie' }}</td>
+                        <td class="py-4 text-base">
                             <div class="flex items-center space-x-2">
                                 @if($article->status === 'published')
                                     <span class="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
@@ -57,34 +72,33 @@
                         </td>
                         
                         <td class="py-4 text-sm text-gray-700">
-    <div class="flex items-center space-x-4">
-        {{-- Functional Edit Button (Pencil Icon) --}}
-        <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-black hover:text-gray-600 transition" title="Modifier">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-            </svg>
-        </a>
+                            <div class="flex items-center space-x-4">
+                                {{-- Functional Edit Button (Pencil Icon) --}}
+                                <a href="{{ route('admin.articles.edit', $article->id) }}" class="text-black hover:text-gray-600 transition" title="Modifier">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.25" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                    </svg>
+                                </a>
 
-        {{-- Delete Button (Cross Icon) --}}
-        {{-- Delete Button (Cross Icon) --}}
-        <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');" style="margin: 0;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-black hover:text-gray-600 transition bg-transparent border-none p-1 cursor-pointer flex items-center" title="Supprimer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </form>
+                                {{-- Delete Button (Cross Icon) --}}
+                                <form action="{{ route('admin.articles.destroy', $article->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');" style="margin: 0;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-black hover:text-gray-600 transition bg-transparent border-none p-1 cursor-pointer flex items-center" title="Supprimer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.25" stroke="currentColor" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </form>
 
-        {{-- View Public Details Button (External Link Icon) --}}
-        <a href="{{ route('articles.details', $article->slug) }}" class="text-black hover:text-gray-600 transition" title="Voir l'article">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V12M16.5 4.5h4.5m0 0v4.5m0-4.5L11 14" />
-            </svg>
-        </a>
-    </div>
-</td>
+                                {{-- View Public Details Button (External Link Icon) --}}
+                                <a href="{{ route('articles.details', $article->slug) }}" class="text-black hover:text-gray-600 transition" title="Voir l'article">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V12M16.5 4.5h4.5m0 0v4.5m0-4.5L11 14" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 @empty
                     <tr>
