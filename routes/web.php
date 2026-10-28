@@ -4,7 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegisterController;
 // Public Front-End Routes
 Route::get('/', function () { 
     return view('HOME');
@@ -50,8 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     
 });
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RegisterController;
+
 
 // Registration Routes
 Route::get('/users/create', [RegisterController::class, 'create'])->name('register');

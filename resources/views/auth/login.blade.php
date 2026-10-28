@@ -15,7 +15,7 @@
                 <label for="email" class="block text-sm font-medium text-black mb-2">Email</label>
                 <input type="email" name="email" id="email" value="{{ old('email') }}" required autofocus
                     class="w-full border border-gray-400 p-3 text-gray-900 focus:outline-none focus:border-black"
-                    placeholder="janesepa@email.com">
+                    placeholder="your@email.com">
             </div>
 
             {{-- Password --}}

@@ -16,11 +16,12 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+            //. this symbol (|) is done with shift + option + L
         $validated = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // expects 'password_confirmation' field
+            'password' => 'required|string|min:6|confirmed', // expects 'password_confirmation' field
         ]);
 
         $user = User::create([

@@ -37,8 +37,10 @@
                 {{-- Auth Navigation (When logged in) --}}
                 @auth
                     {{-- User Greeting --}}
-                    <span class="text-black font-semibold">
-                        Bonjour, {{ Auth::user()->firstname ?? Auth::user()->name }}
+                    <span class="text-black font-bold text-base">
+                        {{-- Bonjour, {{ Auth::user()->firstname ?? Auth::user()->name }} welcome to this Blog.--}}
+                        Bonjour, {{ Auth::user()->firstname.' '.Auth::user()->lastname ?? Auth::user()->name }}
+
                     </span>
 
                     {{-- Logout Form (POST request with CSRF protection) --}}
